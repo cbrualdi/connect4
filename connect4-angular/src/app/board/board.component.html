@@ -1,0 +1,9 @@
+<div class="game-board">
+  <div *ngFor="let r of n_rows; let iR = index" class="board-row">
+    <app-square *ngFor="let c of n_cols; let iC = index"
+      [value]="squares[iR*7 + iC]"
+      [winner]="winner?.includes(iR*7 + iC) || false"
+      (click)="makeMove(iR*7 + iC)">
+    </app-square>
+  </div>
+</div>

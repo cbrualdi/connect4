@@ -1,0 +1,29 @@
+<h1>Connect 4</h1>
+<h3 *ngIf="winner.length">{{ this.history[this.stepNumber].squares[winner[0]] }} wins!</h3>
+<h3 *ngIf="!winner.length && squares.includes(null)">Next move: {{ player }}</h3>
+<h3 *ngIf="!winner.length && !squares.includes(null)">Game ended in a draw</h3>
+<div class="game">
+  <div>
+    <app-board
+      [squares]="this.history[this.stepNumber].squares"
+      [winner]="winner"
+      (move)="onMove($event)"></app-board>
+    <app-timer [started]="started"></app-timer>
+  </div>
+  <div class="game-info" *ngIf="history.length > 1">
+    <div>
+      <b>History:</b>
+    </div>
+    <ul>
+      <li *ngFor="let move of history.slice(0, history.length - 1); let i = index">
+        <div *ngIf="i === 0 then inizio else mossa" ></div>
+        <ng-template #inizio>
+          <button (click)="jumpTo(i)">{{move.desc}}</button>
+        </ng-template>
+        <ng-template #mossa>
+          <button (click)="jumpTo(i)">Go to move #{{i}} ({{move.desc}})</button>
+        </ng-template>
+      </li>
+    </ul>
+  </div>
+</div>
