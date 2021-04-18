@@ -1,0 +1,22 @@
+﻿<button class="square @Color" @onclick="@(() => OnClick.InvokeAsync())">
+    @(Winner ? "✓" : string.Empty)
+</button>
+
+@code {
+
+    [Parameter]
+    public Player? Value { get; set; }
+
+    [Parameter]
+    public bool Winner { get; set; }
+
+    [Parameter] 
+    public EventCallback OnClick { get; set; }
+
+    private string Color {
+        get => Value is not null
+            ? Value.Equals(Player.Red) ? "red" : "yellow"
+            : "white";
+    }
+
+}

@@ -1,0 +1,33 @@
+﻿@if (List.Count > 1)
+{
+    <div class="game-info">
+        <div>
+            <b>History:</b>
+        </div>
+        <ul>
+            @for (int i = 0; i < List.Count - 1; i++)
+            {
+                var step = i;
+                <li>
+
+                    <button @onclick="() => OnJump.InvokeAsync(step)">
+                        @(i == 0 
+                            ? List[i].Description
+                            : $"Go to move #{i} ({List[i].Description})")
+                    </button>
+                </li>
+            }
+
+        </ul>
+    </div>
+}
+
+@code {
+
+    [Parameter]
+    public List<HistoryMove> List { get; set; }
+
+    [Parameter]
+    public EventCallback<int> OnJump { get; set; }
+
+}

@@ -1,0 +1,61 @@
+﻿<div class="game-board">
+    @for (int r = 0; r < rows; r++)
+    {
+    <div class="board-row">
+        @for (int c = 0; c < cols; c++)
+        {
+            var i = r*7 + c;
+            var winner = Winners?.Contains(i) ?? false;
+
+            <Square
+                Value="@Squares[i]"
+                Winner="@winner"
+                OnClick="() => MakeMove(i)"
+            />
+        }
+    </div>
+    }  
+</div>
+
+@code {
+
+    [Parameter]
+    public List<Player?> Squares { get; set; }
+
+    [Parameter]
+    public List<int?> Winners { get; set; }
+
+    [Parameter]
+    public EventCallback<int> OnMove { get; set; }
+
+    void MakeMove(int i)
+    {
+        if (Squares[i] is null && Winners.Contains(null))
+        {
+            OnMove.InvokeAsync(CalculateFallCell(Squares, i));
+        }
+    }
+
+    int CalculateFallCell(List<Player?> Squares, int selected)
+    {
+        for (int i = selected; i < Squares.Count; i += 7)
+        {
+            if (i+7 < Squares.Count)
+            {
+                if (Squares[i+7] is not null)
+                {
+                    return i;
+                }
+            }
+            else
+            {
+                return i;
+            }
+        }
+        return -1;
+    }
+
+    private const int rows = 6;
+    private const int cols = 7;
+
+}

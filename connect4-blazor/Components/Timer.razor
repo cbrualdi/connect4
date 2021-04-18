@@ -1,0 +1,31 @@
+﻿<div class="timer">Game started from @Time sec.</div>
+
+@code {
+
+    [Parameter]
+    public bool Started { get; set; }
+
+    private int Time = 0;
+
+    private void Tick()
+    {
+        if (Started)
+        {
+            Time = Time + 1;
+        }
+    }
+
+    protected override Task OnInitializedAsync()
+    {
+        Task.Run(async () =>
+        {
+            for (;;)
+            {
+                await Task.Delay(1000);
+                Tick();
+                StateHasChanged();
+            }
+        });
+        return base.OnInitializedAsync();
+    }
+}
