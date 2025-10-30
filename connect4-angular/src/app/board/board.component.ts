@@ -2,9 +2,10 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Square } from '../square/square.component';
 
 @Component({
-  selector: 'app-board',
-  templateUrl: './board.component.html',
-  styleUrls: ['./board.component.css']
+    selector: 'app-board',
+    templateUrl: './board.component.html',
+    styleUrls: ['./board.component.css'],
+    standalone: false
 })
 export class BoardComponent {
 
