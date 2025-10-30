@@ -3,9 +3,10 @@ import { Component, Input } from '@angular/core';
 export type Square = "Red" | "Yellow" | null;
 
 @Component({
-  selector: 'app-square',
-  templateUrl: './square.component.html',
-  styleUrls: ['./square.component.css']
+    selector: 'app-square',
+    templateUrl: './square.component.html',
+    styleUrls: ['./square.component.css'],
+    standalone: false
 })
 export class SquareComponent {
 

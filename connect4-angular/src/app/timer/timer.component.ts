@@ -1,8 +1,9 @@
 import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-timer',
-  template: `<div class="timer">Game started from {{timer}} sec.</div>`
+    selector: 'app-timer',
+    template: `<div class="timer">Game started from {{timer}} sec.</div>`,
+    standalone: false
 })
 export class TimerComponent implements OnInit {
 
